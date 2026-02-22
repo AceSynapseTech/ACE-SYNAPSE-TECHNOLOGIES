@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACE SYNAPSE · enterprise core</title>
+  <title>ACE SYNAPSE · enterprise platform</title>
   <style>
     * {
       margin: 0;
@@ -41,7 +41,6 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* premium overlay with tech pattern */
     .intro::before {
       content: "";
       position: absolute;
@@ -76,7 +75,7 @@
       z-index: 20;
     }
 
-    /* ----- LOGO-STYLE A (business/tech) ----- */
+    /* ----- LOGO-STYLE A ----- */
     .a-container {
       margin-bottom: 2rem;
       opacity: 1;
@@ -94,7 +93,6 @@
       filter: drop-shadow(0 0 40px rgba(0, 160, 255, 0.8));
     }
 
-    /* corporate A with sharp edges, strong serif-like structure */
     .letter-path {
       stroke: #ffffff;
       stroke-width: 14;
@@ -114,7 +112,6 @@
       100% { stroke-dashoffset: 0; filter: drop-shadow(0 0 30px #ffffff); }
     }
 
-    /* full logo (all caps, bold) */
     .real-logo {
       margin: 0.5rem 0 1.5rem;
       opacity: 0;
@@ -141,7 +138,6 @@
       text-transform: uppercase;
     }
 
-    /* intro typing container - with italics for descriptions */
     .intro-text {
       margin: 1.5rem 0 2rem;
       min-height: 200px;
@@ -170,20 +166,17 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* italic style for taglines */
     .typed-line:nth-child(2),
     .typed-line:nth-child(3),
     .typed-line:nth-child(4) {
       font-style: italic;
       font-weight: 350;
-      opacity: 0.95;
     }
 
     .typed-line:last-child {
       border-right: none;
     }
 
-    /* bottom corporate bar */
     .bottom-copyright {
       margin-top: 2.8rem;
       font-size: 1.1rem;
@@ -219,35 +212,34 @@
       font-weight: 400;
     }
 
-    /* ----- HOMEPAGE (BUSINESS/TECH ENTERPRISE) ----- */
-    .homepage {
+    /* ----- MAIN PLATFORM (MULTI-PAGE SPA) ----- */
+    .platform {
       min-height: 100vh;
       background: 
         linear-gradient(135deg, rgba(245, 250, 255, 0.97), rgba(235, 245, 255, 0.97)),
         url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2069&q=80') center/cover fixed;
       color: #0a2538;
-      padding: 4rem 2rem;
       opacity: 0;
       transition: opacity 1.4s ease;
       pointer-events: none;
       font-family: 'Inter', sans-serif;
     }
 
-    .homepage.visible {
+    .platform.visible {
       opacity: 1;
       pointer-events: auto;
     }
 
-    /* navigation */
+    /* navigation - 3 lines at top right */
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(0,40,80,0.1);
-      padding: 1rem 2rem;
+      padding: 0.8rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -256,66 +248,107 @@
 
     .nav-logo {
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #0a2a44;
       letter-spacing: 1px;
     }
 
-    .nav-links {
+    /* three-line menu container */
+    .nav-menu {
       display: flex;
-      gap: 2.5rem;
-      color: #1e3b5c;
-      font-weight: 500;
-      font-size: 0.95rem;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.2rem;
     }
 
-    .nav-links span {
-      cursor: default;
+    .nav-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: #1e3b5c;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      background: rgba(0,100,200,0.1);
+      color: #0066aa;
+    }
+
+    .nav-link.active {
+      background: #0a2a44;
+      color: white;
     }
 
     .container {
       max-width: 1300px;
       margin: 0 auto;
-      padding-top: 80px;
+      padding: 100px 2rem 2rem;
     }
 
-    .hero {
-      padding: 4rem 0 5rem;
-      text-align: center;
+    /* page sections (all hidden by default) */
+    .page-section {
+      display: none;
+      animation: fadePage 0.4s ease;
     }
 
-    .hero h1 {
-      font-size: 4.2rem;
+    .page-section.active-page {
+      display: block;
+    }
+
+    @keyframes fadePage {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* page headers */
+    .page-header {
+      font-size: 2.8rem;
       font-weight: 600;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #0a2a44, #1f4b7a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1.5rem;
+      color: #0a2a44;
+      margin-bottom: 2rem;
     }
 
-    .hero p {
-      font-size: 1.6rem;
+    .page-sub {
+      font-size: 1.3rem;
       color: #1f4b7a;
       font-style: italic;
-      max-width: 800px;
-      margin: 0 auto 2.5rem;
+      margin-bottom: 3rem;
     }
 
-    .btn-group {
-      display: flex;
-      gap: 1.2rem;
-      justify-content: center;
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 25px 40px -15px #1f4b7a33;
+      border: 1px solid white;
     }
 
     .btn {
       background: white;
       border: 1px solid #d0deed;
-      padding: 0.9rem 2.5rem;
+      padding: 0.7rem 2rem;
       border-radius: 50px;
-      font-weight: 600;
+      font-weight: 500;
       color: #0a2a44;
-      box-shadow: 0 5px 15px -8px #1f4b7a;
+      display: inline-block;
+      margin-top: 1rem;
       cursor: default;
     }
 
@@ -323,68 +356,6 @@
       background: #0a2a44;
       color: white;
       border: none;
-      box-shadow: 0 15px 25px -12px #0a2a44;
-    }
-
-    .section-title {
-      font-size: 2.4rem;
-      font-weight: 600;
-      color: #0a2a44;
-      margin: 4rem 0 2.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 2rem;
-      padding: 2.2rem;
-      box-shadow: 0 25px 40px -15px #1f4b7a33;
-      border: 1px solid white;
-    }
-
-    .price {
-      font-size: 2.2rem;
-      font-weight: 600;
-      color: #0a2a44;
-      margin: 1rem 0;
-    }
-
-    .search-bar {
-      display: flex;
-      background: white;
-      border-radius: 60px;
-      border: 1px solid #d9e5f0;
-      padding: 0.3rem;
-    }
-
-    .search-bar input {
-      flex: 1;
-      border: none;
-      padding: 0 1.5rem;
-      outline: none;
-    }
-
-    .dash-preview {
-      display: flex;
-      gap: 2rem;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 2.5rem;
-      padding: 2rem;
-    }
-
-    .stat-card {
-      background: white;
-      border-radius: 1.8rem;
-      padding: 1.8rem;
-      box-shadow: 0 10px 20px -8px #9bb8da;
     }
 
     .stat-number {
@@ -393,7 +364,8 @@
       color: #0a2a44;
     }
 
-    .footer {
+    /* footer */
+    .platform-footer {
       background: rgba(10, 42, 68, 0.05);
       border-radius: 3rem 3rem 0 0;
       padding: 3rem;
@@ -405,108 +377,174 @@
 </head>
 <body>
 
-<!-- INTRO with business/tech background image -->
+<!-- INTRO SCREEN -->
 <div id="intro" class="intro">
   <div class="intro-content">
-
-    <!-- corporate LOGO-STYLE "A" -->
     <div id="aContainer" class="a-container">
       <svg viewBox="0 0 200 200">
-        <!-- strong, italic-like A with slab crossbar -->
         <path class="letter-path" d="M 35 165 L 100 20 L 165 165 M 55 115 L 145 115" />
       </svg>
     </div>
-
-    <!-- full corporate logo -->
     <div id="realLogo" class="real-logo">
       <div class="logo-text">ACE SYNAPSE TECHNOLOGIES</div>
     </div>
-
-    <!-- typing lines (italics for descriptions) -->
     <div id="introText" class="intro-text">
       <div id="line1" class="typed-line"></div>
       <div id="line2" class="typed-line"></div>
       <div id="line3" class="typed-line"></div>
       <div id="line4" class="typed-line"></div>
     </div>
-
-    <!-- bottom EST & rights -->
     <div id="bottomCopy" class="bottom-copyright">
       <span class="est-badge">EST. 2025</span>
       <span class="rights">© 2026 ACE SYNAPSE · ALL RIGHTS RESERVED</span>
     </div>
-
   </div>
 </div>
 
-<!-- ENTERPRISE HOMEPAGE -->
-<div id="homepage" class="homepage">
+<!-- MAIN PLATFORM (SPA with 3-line nav) -->
+<div id="platform" class="platform">
   <nav class="navbar">
     <span class="nav-logo">ACE SYNAPSE</span>
-    <div class="nav-links">
-      <span>HOSTING</span>
-      <span>DOMAINS</span>
-      <span>DEPLOYMENT</span>
-      <span>ACE AI</span>
-      <span>DASHBOARD</span>
-      <span>PORTFOLIO</span>
+    <div class="nav-menu">
+      <div class="nav-row">
+        <span class="nav-link" data-page="welcome">WELCOME</span>
+        <span class="nav-link" data-page="dashboard">DASHBOARD</span>
+        <span class="nav-link" data-page="aceai">ACE AI</span>
+        <span class="nav-link" data-page="hosting">HOSTING</span>
+        <span class="nav-link" data-page="domains">DOMAINS</span>
+      </div>
+      <div class="nav-row">
+        <span class="nav-link" data-page="finance">FINANCE</span>
+        <span class="nav-link" data-page="cloud">CLOUD STORAGE</span>
+        <span class="nav-link" data-page="websites">WEBSITES WE CREATE</span>
+        <span class="nav-link" data-page="consulting">CONSULTING</span>
+      </div>
+      <div class="nav-row">
+        <span class="nav-link" data-page="integrations">INTEGRATIONS</span>
+      </div>
     </div>
   </nav>
 
   <div class="container">
-    <div class="hero">
-      <h1>The Core of Digital Innovation</h1>
-      <p><i>Enterprise infrastructure for the next generation</i></p>
-      <div class="btn-group">
-        <span class="btn btn-primary">Get Started</span>
-        <span class="btn">Explore Platform</span>
+    <!-- WELCOME PAGE (default) -->
+    <div id="welcome" class="page-section active-page">
+      <h1 class="page-header">Welcome to the Core</h1>
+      <p class="page-sub">The Core of Digital Innovation · Enterprise platform</p>
+      <div class="card-grid">
+        <div class="card"><h3>Platform status</h3><p>All systems operational</p><div class="stat-number">100%</div></div>
+        <div class="card"><h3>Active projects</h3><p>Global footprint</p><div class="stat-number">1,284</div></div>
+        <div class="card"><h3>AI instances</h3><p>Running neural engines</p><div class="stat-number">47</div></div>
       </div>
     </div>
 
-    <h2 class="section-title">⚡ Hosting infrastructure</h2>
-    <div class="grid-3">
-      <div class="card"><h3>Startup</h3><p>30 GB SSD · 2 TB transfer</p><div class="price">$19<span style="font-size:1rem">/mo</span></div><span class="btn">Deploy now</span></div>
-      <div class="card"><h3>Business</h3><p>100 GB NVMe · 5 TB transfer</p><div class="price">$49<span style="font-size:1rem">/mo</span></div><span class="btn">Deploy now</span></div>
-      <div class="card"><h3>Enterprise</h3><p>500 GB NVMe · unlimited</p><div class="price">$149<span style="font-size:1rem">/mo</span></div><span class="btn">Deploy now</span></div>
-    </div>
-
-    <h2 class="section-title">🔍 Domain marketplace</h2>
-    <div class="card">
-      <div class="search-bar">
-        <input type="text" placeholder="search for your domain...">
-        <span class="btn btn-primary" style="border-radius:60px;">Check</span>
-      </div>
-      <div style="display:flex; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;">
-        <span class="btn" style="background:#eef4fa;">synapse.tech $12</span>
-        <span class="btn" style="background:#eef4fa;">acecloud.io $19</span>
-        <span class="btn" style="background:#eef4fa;">deploy.xyz $9</span>
+    <!-- DASHBOARD PAGE -->
+    <div id="dashboard" class="page-section">
+      <h1 class="page-header">Enterprise Dashboard</h1>
+      <p class="page-sub">Real-time infrastructure overview</p>
+      <div class="card-grid">
+        <div class="card"><span>Total websites</span><div class="stat-number">24</div></div>
+        <div class="card"><span>Active domains</span><div class="stat-number">13</div></div>
+        <div class="card"><span>Deployments</span><div class="stat-number">89</div></div>
+        <div class="card"><span>AI credits</span><div class="stat-number">5.6k</div></div>
       </div>
     </div>
 
-    <h2 class="section-title">📊 Enterprise dashboard</h2>
-    <div class="dash-preview">
-      <div style="flex:1; background:white; border-radius:2rem; padding:1.5rem;">
-        <div style="margin-bottom:1rem;">📋 OVERVIEW</div>
-        <div>🌐 WEBSITES</div>
-        <div>📦 DEPLOYMENTS</div>
-        <div>🤖 AI CREDITS</div>
-      </div>
-      <div style="flex:3; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-        <div class="stat-card"><span>Total websites</span><div class="stat-number">24</div></div>
-        <div class="stat-card"><span>Active domains</span><div class="stat-number">13</div></div>
-        <div class="stat-card"><span>Deployments</span><div class="stat-number">89</div></div>
-        <div class="stat-card"><span>AI credits</span><div class="stat-number">5.6k</div></div>
+    <!-- ACE AI PAGE -->
+    <div id="aceai" class="page-section">
+      <h1 class="page-header">ACE AI Engine</h1>
+      <p class="page-sub">Neural site builder · Deploy with prompts</p>
+      <div class="card">
+        <p style="margin-bottom:1rem;">"Create a financial dashboard for enterprises"</p>
+        <span class="btn btn-primary">Generate</span>
+        <div style="margin-top:2rem; background:white; padding:1.5rem; border-radius:1.5rem;">
+          <strong>Project synopsis:</strong> React + Node · AI-optimized · Ready in 2.4s
+        </div>
       </div>
     </div>
 
-    <h2 class="section-title">🏆 Live portfolio</h2>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem;">
-      <div class="card"><h3>NovaStore</h3><span style="color:#0f6b3a;">LIVE</span><p>React · Node</p><span class="btn">Visit</span></div>
-      <div class="card"><h3>FinEdge</h3><span style="color:#0f6b3a;">LIVE</span><p>Vue · Python</p><span class="btn">Visit</span></div>
-      <div class="card"><h3>Medtrix AI</h3><span style="color:#0f6b3a;">LIVE</span><p>Next · FastAPI</p><span class="btn">Visit</span></div>
+    <!-- HOSTING PAGE -->
+    <div id="hosting" class="page-section">
+      <h1 class="page-header">Hosting Infrastructure</h1>
+      <p class="page-sub">Global edge network</p>
+      <div class="card-grid">
+        <div class="card"><h3>Startup</h3><p>30 GB SSD · $19/mo</p><span class="btn">Deploy</span></div>
+        <div class="card"><h3>Business</h3><p>100 GB NVMe · $49/mo</p><span class="btn">Deploy</span></div>
+        <div class="card"><h3>Enterprise</h3><p>500 GB NVMe · $149/mo</p><span class="btn">Deploy</span></div>
+      </div>
     </div>
 
-    <footer class="footer">
+    <!-- DOMAINS PAGE -->
+    <div id="domains" class="page-section">
+      <h1 class="page-header">Domain Marketplace</h1>
+      <p class="page-sub">Find your .synapse namespace</p>
+      <div class="card">
+        <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
+          <input type="text" placeholder="search domain" style="flex:1; padding:0.8rem; border-radius:40px; border:1px solid #ccc;">
+          <span class="btn btn-primary">Check</span>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <span class="btn" style="background:#eef4fa;">synapse.tech $12</span>
+          <span class="btn" style="background:#eef4fa;">acecloud.io $19</span>
+          <span class="btn" style="background:#eef4fa;">deploy.xyz $9</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCE PAGE -->
+    <div id="finance" class="page-section">
+      <h1 class="page-header">Finance & Billing</h1>
+      <p class="page-sub">Usage-based pricing · Enterprise plans</p>
+      <div class="card-grid">
+        <div class="card"><h3>Current spend</h3><div class="stat-number">$1,284</div><span>This month</span></div>
+        <div class="card"><h3>Invoices</h3><div class="stat-number">12</div><span>Paid</span></div>
+      </div>
+    </div>
+
+    <!-- CLOUD STORAGE PAGE -->
+    <div id="cloud" class="page-section">
+      <h1 class="page-header">Cloud Storage</h1>
+      <p class="page-sub">S3-compatible · Edge cache</p>
+      <div class="card-grid">
+        <div class="card"><h3>Used</h3><div class="stat-number">2.4 TB</div></div>
+        <div class="card"><h3>Buckets</h3><div class="stat-number">18</div></div>
+      </div>
+    </div>
+
+    <!-- WEBSITES WE CREATE PAGE -->
+    <div id="websites" class="page-section">
+      <h1 class="page-header">Websites We Create</h1>
+      <p class="page-sub">Live projects built on ACE SYNAPSE</p>
+      <div class="card-grid">
+        <div class="card"><h3>NovaStore</h3><p>React/Node · Live</p><span class="btn">Visit</span></div>
+        <div class="card"><h3>FinEdge</h3><p>Vue/Python · Live</p><span class="btn">Visit</span></div>
+        <div class="card"><h3>Medtrix AI</h3><p>Next/FastAPI · Live</p><span class="btn">Visit</span></div>
+        <div class="card"><h3>BuildStack</h3><p>Angular/Go · Live</p><span class="btn">Visit</span></div>
+      </div>
+    </div>
+
+    <!-- CONSULTING PAGE -->
+    <div id="consulting" class="page-section">
+      <h1 class="page-header">Technology Consulting</h1>
+      <p class="page-sub">Enterprise architecture · Cloud migration</p>
+      <div class="card">
+        <p>Schedule a consultation with our solutions architects.</p>
+        <span class="btn btn-primary">Book now</span>
+      </div>
+    </div>
+
+    <!-- INTEGRATIONS PAGE -->
+    <div id="integrations" class="page-section">
+      <h1 class="page-header">Integrations</h1>
+      <p class="page-sub">Connect your stack</p>
+      <div class="card-grid">
+        <div class="card">GitHub · GitLab</div>
+        <div class="card">Slack · Teams</div>
+        <div class="card">Datadog · New Relic</div>
+        <div class="card">Auth0 · Okta</div>
+      </div>
+    </div>
+
+    <footer class="platform-footer">
       <div style="font-weight:600;">ACE SYNAPSE TECHNOLOGIES</div>
       <hr style="width:200px; margin:1.5rem auto; border-color:#ccc;">
       <div>Powered by ACE SYNAPSE · The Core of Digital Innovation</div>
@@ -517,12 +555,13 @@
 
 <script>
   (function() {
+    // intro animation
     const intro = document.getElementById('intro');
     const aContainer = document.getElementById('aContainer');
     const realLogo = document.getElementById('realLogo');
     const introTextDiv = document.getElementById('introText');
     const bottomCopy = document.getElementById('bottomCopy');
-    const homepage = document.getElementById('homepage');
+    const platform = document.getElementById('platform');
 
     const lines = [
       document.getElementById('line1'),
@@ -541,12 +580,10 @@
     const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
     async function startSequence() {
-      await delay(3400); // A draws
-
+      await delay(3400);
       aContainer.classList.add('fade-out');
       await delay(200);
       realLogo.classList.add('show');
-
       await delay(600);
       introTextDiv.classList.add('visible');
 
@@ -565,34 +602,66 @@
 
       bottomCopy.classList.add('show');
       await delay(1500);
-
       intro.classList.add('fade-out');
-      homepage.classList.add('visible');
-
+      platform.classList.add('visible');
       await delay(1600);
       intro.style.display = 'none';
     }
 
+    // page switching
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.page-section');
+
+    function switchPage(pageId) {
+      sections.forEach(s => s.classList.remove('active-page'));
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add('active-page');
+      
+      navLinks.forEach(link => {
+        if (link.dataset.page === pageId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.dataset.page;
+        if (page) switchPage(page);
+      });
+    });
+
+    // start intro
     window.addEventListener('load', () => {
       aContainer.classList.remove('fade-out');
       realLogo.classList.remove('show');
       introTextDiv.classList.remove('visible');
       bottomCopy.classList.remove('show');
       intro.classList.remove('fade-out');
-      homepage.classList.remove('visible');
+      platform.classList.remove('visible');
       intro.style.display = 'flex';
 
       lines.forEach(l => { l.textContent = ''; l.style.borderRight = 'none'; });
       setTimeout(startSequence, 200);
+
+      // ensure welcome is active
+      switchPage('welcome');
     });
   })();
 </script>
 
 <style>
+  @media (max-width: 800px) {
+    .nav-row { gap: 0.8rem; }
+    .nav-link { font-size: 0.8rem; }
+  }
   @media (max-width: 600px) {
     .typed-line { white-space: normal; border-right: none !important; }
     .bottom-copyright { flex-direction: column; gap: 1rem; }
-    .nav-links { display: none; }
+    .nav-menu { align-items: flex-end; }
   }
 </style>
 
