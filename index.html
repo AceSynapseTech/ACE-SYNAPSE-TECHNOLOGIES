@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACE SYNAPSE · enterprise platform</title>
+  <title>ACE SYNAPSE · enterprise core</title>
   <style>
     * {
       margin: 0;
@@ -253,7 +253,6 @@
       letter-spacing: 1px;
     }
 
-    /* three-line button */
     .menu-button {
       width: 44px;
       height: 44px;
@@ -281,7 +280,6 @@
       transition: all 0.2s;
     }
 
-    /* dropdown menu (3 lines of nav) */
     .dropdown-menu {
       position: absolute;
       top: 70px;
@@ -361,19 +359,19 @@
       font-size: 2.8rem;
       font-weight: 600;
       color: #0a2a44;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     .page-sub {
       font-size: 1.3rem;
       color: #1f4b7a;
       font-style: italic;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
     }
 
@@ -410,6 +408,23 @@
       color: #0a2a44;
     }
 
+    .feature-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .feature-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(10,42,68,0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
     .platform-footer {
       background: rgba(10, 42, 68, 0.05);
       border-radius: 3rem 3rem 0 0;
@@ -417,6 +432,17 @@
       text-align: center;
       margin-top: 4rem;
       backdrop-filter: blur(10px);
+    }
+
+    /* page-specific backgrounds */
+    #welcome {
+      background: radial-gradient(circle at 0% 0%, rgba(0,150,255,0.1) 0%, transparent 50%);
+    }
+    #hosting {
+      background: radial-gradient(circle at 100% 0%, rgba(0,200,255,0.1) 0%, transparent 50%);
+    }
+    #cloud {
+      background: radial-gradient(circle at 50% 0%, rgba(0,100,200,0.15) 0%, transparent 60%);
     }
   </style>
 </head>
@@ -456,7 +482,6 @@
       <div class="menu-line"></div>
     </div>
     
-    <!-- dropdown with 3-line navigation content -->
     <div class="dropdown-menu" id="dropdownMenu">
       <div class="nav-row">
         <span class="nav-link" data-page="welcome">WELCOME</span>
@@ -478,14 +503,49 @@
   </nav>
 
   <div class="container">
-    <!-- WELCOME PAGE -->
+    <!-- WELCOME PAGE - Company Overview -->
     <div id="welcome" class="page-section active-page">
-      <h1 class="page-header">Welcome to the Core</h1>
-      <p class="page-sub">The Core of Digital Innovation · Enterprise platform</p>
-      <div class="card-grid">
-        <div class="card"><h3>Platform status</h3><p>All systems operational</p><div class="stat-number">100%</div></div>
-        <div class="card"><h3>Active projects</h3><p>Global footprint</p><div class="stat-number">1,284</div></div>
-        <div class="card"><h3>AI instances</h3><p>Running neural engines</p><div class="stat-number">47</div></div>
+      <h1 class="page-header">Welcome to ACE SYNAPSE</h1>
+      <p class="page-sub">The Core of Digital Innovation · Founded 2025</p>
+      
+      <div class="card" style="margin-bottom:2rem;">
+        <h2 style="margin-bottom:1rem;">Our Foundation</h2>
+        <p style="font-size:1.2rem; line-height:1.6;">ACE SYNAPSE TECHNOLOGIES was established in 2025 with a singular vision: to engineer the foundational layer of the digital economy. We provide enterprise-grade infrastructure that powers the world's most innovative applications.</p>
+      </div>
+
+      <div class="card-grid" style="margin-bottom:2rem;">
+        <div class="card">
+          <h3>Our Vision</h3>
+          <p style="font-size:1.1rem; margin-top:1rem;">To become the universal fabric connecting ideas to global infrastructure — invisible, instant, and infinite.</p>
+        </div>
+        <div class="card">
+          <h3>Our Mission</h3>
+          <p style="font-size:1.1rem; margin-top:1rem;">Democratize access to cloud, AI, and deployment technologies through a unified, intelligent platform.</p>
+        </div>
+        <div class="card">
+          <h3>Our Motto</h3>
+          <p style="font-size:1.5rem; font-weight:600; color:#0a2a44; margin-top:1rem;">"Engineer the Future"</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:2rem;">
+        <h3 style="margin-bottom:1rem;">What We Offer</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem;">
+          <div style="background:rgba(255,255,255,0.5); padding:1rem; border-radius:1rem;">☁️ Cloud Hosting</div>
+          <div style="background:rgba(255,255,255,0.5); padding:1rem; border-radius:1rem;">🌐 Domain Marketplace</div>
+          <div style="background:rgba(255,255,255,0.5); padding:1rem; border-radius:1rem;">🤖 ACE AI Builder</div>
+          <div style="background:rgba(255,255,255,0.5); padding:1rem; border-radius:1rem;">⚡ Automated Deployment</div>
+          <div style="background:rgba(255,255,255,0.5); padding:1rem; border-radius:1rem;">📊 Enterprise Dashboard</div>
+          <div style="background:rgba(255,255,255,0.5); padding:1rem; border-radius:1rem;">🔧 Technical Consulting</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Leadership</h3>
+        <div style="display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+          <div style="font-size:1.3rem; font-weight:600;">CEO Bonny Karanja</div>
+          <div style="color:#1f4b7a;">"Building the infrastructure for the next billion digital experiences."</div>
+        </div>
       </div>
     </div>
 
@@ -514,14 +574,69 @@
       </div>
     </div>
 
-    <!-- HOSTING PAGE -->
+    <!-- HOSTING PAGE - Cloud Storage focused -->
     <div id="hosting" class="page-section">
-      <h1 class="page-header">Hosting Infrastructure</h1>
-      <p class="page-sub">Global edge network</p>
+      <h1 class="page-header">Cloud Storage</h1>
+      <p class="page-sub">Enterprise object storage · S3-compatible · Edge enabled</p>
+      
+      <div class="card" style="margin-bottom:2rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <h2>Create New Bucket</h2>
+          <span class="btn btn-primary">+ Create Bucket</span>
+        </div>
+        <div style="margin-top:1.5rem; background:rgba(255,255,255,0.5); padding:1rem; border-radius:1rem;">
+          <input type="text" placeholder="bucket-name" style="padding:0.8rem; border-radius:40px; border:1px solid #ccc; width:100%;">
+        </div>
+      </div>
+
       <div class="card-grid">
-        <div class="card"><h3>Startup</h3><p>30 GB SSD · $19/mo</p><span class="btn">Deploy</span></div>
-        <div class="card"><h3>Business</h3><p>100 GB NVMe · $49/mo</p><span class="btn">Deploy</span></div>
-        <div class="card"><h3>Enterprise</h3><p>500 GB NVMe · $149/mo</p><span class="btn">Deploy</span></div>
+        <div class="card">
+          <h3>📁 Browse Files</h3>
+          <p style="color:#666; margin:1rem 0;">/projects /backups /assets</p>
+          <span class="btn">Open browser</span>
+        </div>
+        <div class="card">
+          <h3>📸 Snapshots</h3>
+          <p style="color:#666;">3 snapshots available</p>
+          <ul class="feature-list">
+            <li>Daily backup - 2.3 GB</li>
+            <li>Weekly - 15 GB</li>
+            <li>Monthly - 48 GB</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🔑 Application Keys</h3>
+          <p style="color:#666;">Active keys: 4</p>
+          <span class="btn">Manage keys</span>
+        </div>
+        <div class="card">
+          <h3>📊 Reports</h3>
+          <p style="color:#666;">Usage, performance, audits</p>
+          <span class="btn">Generate report</span>
+        </div>
+        <div class="card">
+          <h3>⚠️ Caps & Alerts</h3>
+          <p style="color:#666;">80% of 5 TB used</p>
+          <div style="width:100%; height:8px; background:#e0e7ff; border-radius:4px; margin:1rem 0;">
+            <div style="width:80%; height:8px; background:#0a2a44; border-radius:4px;"></div>
+          </div>
+          <span class="btn">Configure alerts</span>
+        </div>
+        <div class="card">
+          <h3>🔥 Fireball</h3>
+          <p style="color:#666;">High-speed transfer accelerator</p>
+          <span class="btn">Activate Fireball</span>
+        </div>
+        <div class="card">
+          <h3>🔄 Cloud Replication</h3>
+          <p style="color:#666;">3 regions active</p>
+          <ul class="feature-list">
+            <li>US-East (sync)</li>
+            <li>EU-West (async)</li>
+            <li>Asia-Pacific (async)</li>
+          </ul>
+          <span class="btn">Add region</span>
+        </div>
       </div>
     </div>
 
@@ -552,7 +667,7 @@
       </div>
     </div>
 
-    <!-- CLOUD STORAGE PAGE -->
+    <!-- CLOUD STORAGE PAGE (duplicate but kept for nav) -->
     <div id="cloud" class="page-section">
       <h1 class="page-header">Cloud Storage</h1>
       <p class="page-sub">S3-compatible · Edge cache</p>
@@ -562,7 +677,7 @@
       </div>
     </div>
 
-    <!-- WEBSITES WE CREATE PAGE -->
+    <!-- WEBSITES PAGE -->
     <div id="websites" class="page-section">
       <h1 class="page-header">Websites We Create</h1>
       <p class="page-sub">Live projects built on ACE SYNAPSE</p>
@@ -570,7 +685,6 @@
         <div class="card"><h3>NovaStore</h3><p>React/Node · Live</p><span class="btn">Visit</span></div>
         <div class="card"><h3>FinEdge</h3><p>Vue/Python · Live</p><span class="btn">Visit</span></div>
         <div class="card"><h3>Medtrix AI</h3><p>Next/FastAPI · Live</p><span class="btn">Visit</span></div>
-        <div class="card"><h3>BuildStack</h3><p>Angular/Go · Live</p><span class="btn">Visit</span></div>
       </div>
     </div>
 
@@ -669,7 +783,6 @@
       dropdown.classList.toggle('show');
     });
 
-    // close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       if (!menuButton.contains(e.target) && !dropdown.contains(e.target)) {
         dropdown.classList.remove('show');
@@ -693,7 +806,6 @@
         }
       });
 
-      // close dropdown after selection
       dropdown.classList.remove('show');
     }
 
@@ -705,7 +817,6 @@
       });
     });
 
-    // start intro
     window.addEventListener('load', () => {
       aContainer.classList.remove('fade-out');
       realLogo.classList.remove('show');
@@ -717,8 +828,6 @@
 
       lines.forEach(l => { l.textContent = ''; l.style.borderRight = 'none'; });
       setTimeout(startSequence, 200);
-
-      // ensure welcome is active
       switchPage('welcome');
     });
   })();
