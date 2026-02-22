@@ -1,600 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACE SYNAPSE · enterprise core</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #000;
-      min-height: 100vh;
-    }
-
-    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
-
-    /* ----- INTRO WITH BUSINESS TECH BACKGROUND ----- */
-    .intro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: 
-        linear-gradient(135deg, rgba(0, 20, 40, 0.85) 0%, rgba(0, 40, 60, 0.85) 100%),
-        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      transition: opacity 1.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-      opacity: 1;
-      pointer-events: auto;
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* premium overlay with tech pattern */
-    .intro::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        repeating-linear-gradient(45deg, rgba(0, 255, 255, 0.03) 0px, rgba(0, 255, 255, 0.03) 2px, transparent 2px, transparent 8px),
-        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 30%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .intro::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 50% 50%, rgba(0, 150, 255, 0.15), transparent 70%);
-      z-index: 0;
-    }
-
-    .intro-content {
-      width: 100%;
-      max-width: 1200px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      z-index: 20;
-    }
-
-    /* ----- LOGO-STYLE A (business/tech) ----- */
-    .a-container {
-      margin-bottom: 2rem;
-      opacity: 1;
-      transition: opacity 0.6s ease;
-    }
-
-    .a-container.fade-out {
-      opacity: 0;
-    }
-
-    svg {
-      display: block;
-      width: 200px;
-      height: 200px;
-      filter: drop-shadow(0 0 40px rgba(0, 160, 255, 0.8));
-    }
-
-    /* corporate A with sharp edges, strong serif-like structure */
-    .letter-path {
-      stroke: #ffffff;
-      stroke-width: 14;
-      fill: none;
-      stroke-linecap: butt;
-      stroke-linejoin: miter;
-      stroke-dasharray: 700;
-      stroke-dashoffset: 700;
-      filter: drop-shadow(0 0 15px #0099ff);
-      animation: drawCorporateA 3.6s ease-out forwards;
-    }
-
-    @keyframes drawCorporateA {
-      0% { stroke-dashoffset: 700; filter: drop-shadow(0 0 5px #0066cc); }
-      30% { filter: drop-shadow(0 0 40px #66ccff); }
-      80% { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: 0; filter: drop-shadow(0 0 30px #ffffff); }
-    }
-
-    /* full logo (all caps, bold) */
-    .real-logo {
-      margin: 0.5rem 0 1.5rem;
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.2, 0.9, 0.2, 1);
-      max-width: 90%;
-    }
-
-    .real-logo.show {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .logo-text {
-      font-size: clamp(2.4rem, 11vw, 5rem);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-      background: linear-gradient(135deg, #ffffff 0%, #e0f0ff 70%, #b0d5ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 70px rgba(0, 153, 255, 0.7);
-      white-space: pre-line;
-      text-transform: uppercase;
-    }
-
-    /* intro typing container - with italics for descriptions */
-    .intro-text {
-      margin: 1.5rem 0 2rem;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.9s ease;
-    }
-
-    .intro-text.visible {
-      opacity: 1;
-    }
-
-    .typed-line {
-      font-size: clamp(1.2rem, 4vw, 2rem);
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      margin: 0.4rem 0;
-      color: #ffffff;
-      text-shadow: 0 0 30px rgba(0, 180, 255, 0.6);
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid rgba(0, 200, 255, 0.9);
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* italic style for taglines */
-    .typed-line:nth-child(2),
-    .typed-line:nth-child(3),
-    .typed-line:nth-child(4) {
-      font-style: italic;
-      font-weight: 350;
-      opacity: 0.95;
-    }
-
-    .typed-line:last-child {
-      border-right: none;
-    }
-
-    /* bottom corporate bar */
-    .bottom-copyright {
-      margin-top: 2.8rem;
-      font-size: 1.1rem;
-      font-weight: 350;
-      letter-spacing: 0.1em;
-      color: #ddd;
-      opacity: 0;
-      transition: opacity 1s ease;
-      display: flex;
-      gap: 2.5rem;
-      border-top: 2px solid rgba(0, 200, 255, 0.3);
-      padding-top: 1.8rem;
-      width: 100%;
-      justify-content: center;
-      backdrop-filter: blur(5px);
-    }
-
-    .bottom-copyright.show {
-      opacity: 1;
-    }
-
-    .est-badge {
-      color: #fff;
-      font-weight: 600;
-      background: linear-gradient(135deg, #0066aa, #0099ff);
-      padding: 0.3rem 1.5rem;
-      border-radius: 40px;
-      box-shadow: 0 0 20px #0099ff;
-    }
-
-    .rights {
-      color: #ccc;
-      font-weight: 400;
-    }
-
-    /* ----- HOMEPAGE (BUSINESS/TECH ENTERPRISE) ----- */
-    .homepage {
-      min-height: 100vh;
-      background: 
-        linear-gradient(135deg, rgba(245, 250, 255, 0.97), rgba(235, 245, 255, 0.97)),
-        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2069&q=80') center/cover fixed;
-      color: #0a2538;
-      padding: 4rem 2rem;
-      opacity: 0;
-      transition: opacity 1.4s ease;
-      pointer-events: none;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .homepage.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* navigation */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,40,80,0.1);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-    }
-
-    .nav-logo {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #0a2a44;
-      letter-spacing: 1px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      color: #1e3b5c;
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-
-    .nav-links span {
-      cursor: default;
-    }
-
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding-top: 80px;
-    }
-
-    .hero {
-      padding: 4rem 0 5rem;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 4.2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #0a2a44, #1f4b7a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero p {
-      font-size: 1.6rem;
-      color: #1f4b7a;
-      font-style: italic;
-      max-width: 800px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 1.2rem;
-      justify-content: center;
-    }
-
-    .btn {
-      background: white;
-      border: 1px solid #d0deed;
-      padding: 0.9rem 2.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      color: #0a2a44;
-      box-shadow: 0 5px 15px -8px #1f4b7a;
-      cursor: default;
-    }
-
-    .btn-primary {
-      background: #0a2a44;
-      color: white;
-      border: none;
-      box-shadow: 0 15px 25px -12px #0a2a44;
-    }
-
-    .section-title {
-      font-size: 2.4rem;
-      font-weight: 600;
-      color: #0a2a44;
-      margin: 4rem 0 2.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 2rem;
-      padding: 2.2rem;
-      box-shadow: 0 25px 40px -15px #1f4b7a33;
-      border: 1px solid white;
-    }
-
-    .price {
-      font-size: 2.2rem;
-      font-weight: 600;
-      color: #0a2a44;
-      margin: 1rem 0;
-    }
-
-    .search-bar {
-      display: flex;
-      background: white;
-      border-radius: 60px;
-      border: 1px solid #d9e5f0;
-      padding: 0.3rem;
-    }
-
-    .search-bar input {
-      flex: 1;
-      border: none;
-      padding: 0 1.5rem;
-      outline: none;
-    }
-
-    .dash-preview {
-      display: flex;
-      gap: 2rem;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 2.5rem;
-      padding: 2rem;
-    }
-
-    .stat-card {
-      background: white;
-      border-radius: 1.8rem;
-      padding: 1.8rem;
-      box-shadow: 0 10px 20px -8px #9bb8da;
-    }
-
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 500;
-      color: #0a2a44;
-    }
-
-    .footer {
-      background: rgba(10, 42, 68, 0.05);
-      border-radius: 3rem 3rem 0 0;
-      padding: 3rem;
-      text-align: center;
-      margin-top: 4rem;
-      backdrop-filter: blur(10px);
-    }
-  </style>
-</head>
-<body>
-
-<!-- INTRO with business/tech background image -->
-<div id="intro" class="intro">
-  <div class="intro-content">
-
-    <!-- corporate LOGO-STYLE "A" -->
-    <div id="aContainer" class="a-container">
-      <svg viewBox="0 0 200 200">
-        <!-- strong, italic-like A with slab crossbar -->
-        <path class="letter-path" d="M 35 165 L 100 20 L 165 165 M 55 115 L 145 115" />
-      </svg>
-    </div>
-
-    <!-- full corporate logo -->
-    <div id="realLogo" class="real-logo">
-      <div class="logo-text">ACE SYNAPSE TECHNOLOGIES</div>
-    </div>
-
-    <!-- typing lines (italics for descriptions) -->
-    <div id="introText" class="intro-text">
-      <div id="line1" class="typed-line"></div>
-      <div id="line2" class="typed-line"></div>
-      <div id="line3" class="typed-line"></div>
-      <div id="line4" class="typed-line"></div>
-    </div>
-
-    <!-- bottom EST & rights -->
-    <div id="bottomCopy" class="bottom-copyright">
-      <span class="est-badge">EST. 2025</span>
-      <span class="rights">© 2026 ACE SYNAPSE · ALL RIGHTS RESERVED</span>
-    </div>
-
-  </div>
-</div>
-
-<!-- ENTERPRISE HOMEPAGE -->
-<div id="homepage" class="homepage">
-  <nav class="navbar">
-    <span class="nav-logo">ACE SYNAPSE</span>
-    <div class="nav-links">
-      <span>HOSTING</span>
-      <span>DOMAINS</span>
-      <span>DEPLOYMENT</span>
-      <span>ACE AI</span>
-      <span>DASHBOARD</span>
-      <span>PORTFOLIO</span>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="hero">
-      <h1>The Core of Digital Innovation</h1>
-      <p><i>Enterprise infrastructure for the next generation</i></p>
-      <div class="btn-group">
-        <span class="btn btn-primary">Get Started</span>
-        <span class="btn">Explore Platform</span>
-      </div>
-    </div>
-
-    <h2 class="section-title">⚡ Hosting infrastructure</h2>
-    <div class="grid-3">
-      <div class="card"><h3>Startup</h3><p>30 GB SSD · 2 TB transfer</p><div class="price">$19<span style="font-size:1rem">/mo</span></div><span class="btn">Deploy now</span></div>
-      <div class="card"><h3>Business</h3><p>100 GB NVMe · 5 TB transfer</p><div class="price">$49<span style="font-size:1rem">/mo</span></div><span class="btn">Deploy now</span></div>
-      <div class="card"><h3>Enterprise</h3><p>500 GB NVMe · unlimited</p><div class="price">$149<span style="font-size:1rem">/mo</span></div><span class="btn">Deploy now</span></div>
-    </div>
-
-    <h2 class="section-title">🔍 Domain marketplace</h2>
-    <div class="card">
-      <div class="search-bar">
-        <input type="text" placeholder="search for your domain...">
-        <span class="btn btn-primary" style="border-radius:60px;">Check</span>
-      </div>
-      <div style="display:flex; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;">
-        <span class="btn" style="background:#eef4fa;">synapse.tech $12</span>
-        <span class="btn" style="background:#eef4fa;">acecloud.io $19</span>
-        <span class="btn" style="background:#eef4fa;">deploy.xyz $9</span>
-      </div>
-    </div>
-
-    <h2 class="section-title">📊 Enterprise dashboard</h2>
-    <div class="dash-preview">
-      <div style="flex:1; background:white; border-radius:2rem; padding:1.5rem;">
-        <div style="margin-bottom:1rem;">📋 OVERVIEW</div>
-        <div>🌐 WEBSITES</div>
-        <div>📦 DEPLOYMENTS</div>
-        <div>🤖 AI CREDITS</div>
-      </div>
-      <div style="flex:3; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-        <div class="stat-card"><span>Total websites</span><div class="stat-number">24</div></div>
-        <div class="stat-card"><span>Active domains</span><div class="stat-number">13</div></div>
-        <div class="stat-card"><span>Deployments</span><div class="stat-number">89</div></div>
-        <div class="stat-card"><span>AI credits</span><div class="stat-number">5.6k</div></div>
-      </div>
-    </div>
-
-    <h2 class="section-title">🏆 Live portfolio</h2>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem;">
-      <div class="card"><h3>NovaStore</h3><span style="color:#0f6b3a;">LIVE</span><p>React · Node</p><span class="btn">Visit</span></div>
-      <div class="card"><h3>FinEdge</h3><span style="color:#0f6b3a;">LIVE</span><p>Vue · Python</p><span class="btn">Visit</span></div>
-      <div class="card"><h3>Medtrix AI</h3><span style="color:#0f6b3a;">LIVE</span><p>Next · FastAPI</p><span class="btn">Visit</span></div>
-    </div>
-
-    <footer class="footer">
-      <div style="font-weight:600;">ACE SYNAPSE TECHNOLOGIES</div>
-      <hr style="width:200px; margin:1.5rem auto; border-color:#ccc;">
-      <div>Powered by ACE SYNAPSE · The Core of Digital Innovation</div>
-      <div style="margin-top:1rem;">© 2026 · EST. 2025 · All rights reserved</div>
-    </footer>
-  </div>
-</div>
-
-<script>
-  (function() {
-    const intro = document.getElementById('intro');
-    const aContainer = document.getElementById('aContainer');
-    const realLogo = document.getElementById('realLogo');
-    const introTextDiv = document.getElementById('introText');
-    const bottomCopy = document.getElementById('bottomCopy');
-    const homepage = document.getElementById('homepage');
-
-    const lines = [
-      document.getElementById('line1'),
-      document.getElementById('line2'),
-      document.getElementById('line3'),
-      document.getElementById('line4')
-    ];
-
-    const lineTexts = [
-      "ACE SYNAPSE TECHNOLOGIES",
-      "The Core of Digital Innovation",
-      "Enterprise infrastructure for the next generation",
-      "Hosting · AI · Deployment · Domains"
-    ];
-
-    const delay = (ms) => new Promise(res => setTimeout(res, ms));
-
-    async function startSequence() {
-      await delay(3400); // A draws
-
-      aContainer.classList.add('fade-out');
-      await delay(200);
-      realLogo.classList.add('show');
-
-      await delay(600);
-      introTextDiv.classList.add('visible');
-
-      for (let i = 0; i < lines.length; i++) {
-        const el = lines[i];
-        const text = lineTexts[i];
-        el.textContent = '';
-        el.style.borderRight = '2px solid rgba(0, 200, 255, 0.9)';
-        for (let j = 0; j < text.length; j++) {
-          el.textContent += text[j];
-          await delay(50);
-        }
-        el.style.borderRight = 'none';
-        await delay(250);
-      }
-
-      bottomCopy.classList.add('show');
-      await delay(1500);
-
-      intro.classList.add('fade-out');
-      homepage.classList.add('visible');
-
-      await delay(1600);
-      intro.style.display = 'none';
-    }
-
-    window.addEventListener('load', () => {
-      aContainer.classList.remove('fade-out');
-      realLogo.classList.remove('show');
-      introTextDiv.classList.remove('visible');
-      bottomCopy.classList.remove('show');
-      intro.classList.remove('fade-out');
-      homepage.classList.remove('visible');
-      intro.style.display = 'flex';
-
-      lines.forEach(l => { l.textContent = ''; l.style.borderRight = 'none'; });
-      setTimeout(startSequence, 200);
-    });
-  })();
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACE SYNAPSE TECHNOLOGIES</title>
 
 <style>
-  @media (max-width: 600px) {
-    .typed-line { white-space: normal; border-right: none !important; }
-    .bottom-copyright { flex-direction: column; gap: 1rem; }
-    .nav-links { display: none; }
-  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+/* ================= HERO SECTION ================= */
+
+.hero {
+    height: 100vh;
+    background: url("https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1950&q=80") no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 20, 40, 0.85);
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+/* ================= SVG LOGO ================= */
+
+.logo-svg {
+    width: 140px;
+    margin: 0 auto 20px auto;
+}
+
+.logo-svg path {
+    fill: none;
+    stroke: #00c3ff;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ================= TEXT STYLES ================= */
+
+h1 {
+    font-size: 48px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: #d4eaff;
+}
+
+.description {
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.est {
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 15px;
+    letter-spacing: 3px;
+}
+
+footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 768px) {
+    h1 { font-size: 32px; }
+    h2 { font-size: 20px; }
+    .description { font-size: 16px; }
+}
 </style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="overlay"></div>
+
+    <div class="content">
+
+        <!-- Custom SVG A Logo -->
+        <svg class="logo-svg" viewBox="0 0 200 200">
+            <path d="M50 160 L100 40 L150 160 M70 120 L130 120"/>
+        </svg>
+
+        <h1>ACE SYNAPSE</h1>
+        <h1 style="font-weight:300;">TECHNOLOGIES</h1>
+
+        <h2>The Core of Digital Innovation</h2>
+
+        <div class="description">
+            Hosting • AI • Deployment • Domains<br>
+            Engineering the Future of the Web
+        </div>
+
+        <div class="est">EST 2025</div>
+
+    </div>
+
+    <footer>
+        © 2026 ACE SYNAPSE TECHNOLOGIES • All Rights Reserved.
+    </footer>
+
+</section>
 
 </body>
 </html>
